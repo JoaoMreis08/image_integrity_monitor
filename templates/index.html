@@ -2,28 +2,65 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Image Integrity Monitor</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>🔐 Image Integrity Monitor</h1>
+    <div class="bg"></div>
+    <main class="container">
+        <header class="hero">
+            <div>
+                <p class="eyebrow">Image Integrity Monitor</p>
+                <h1>Verifica alteracoes de imagens com hashes SHA-256</h1>
+                <p class="subtitle">Upload rapido, registo local e deteccao imediata de mudancas.</p>
+            </div>
+            <div class="hero-card">
+                <div class="stat">
+                    <span class="stat-label">Imagens registadas</span>
+                    <span class="stat-value">{{ hashes|length }}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Formato suportado</span>
+                    <span class="stat-value">PNG, JPG, WEBP</span>
+                </div>
+            </div>
+        </header>
 
-        <form method="POST" enctype="multipart/form-data">
-            <input type="file" name="image" required>
-            <button type="submit">Verificar</button>
-        </form>
+        <section class="upload">
+            <form method="POST" enctype="multipart/form-data" class="upload-form">
+                <input type="file" name="image" required>
+                <button type="submit">Verificar imagem</button>
+            </form>
+            {% if message %}
+                <p class="message">{{ message }}</p>
+            {% endif %}
+        </section>
 
-        {% if message %}
-            <p class="message">{{ message }}</p>
-        {% endif %}
-
-        <h2>Imagens registadas</h2>
-        <ul>
-            {% for img, hash in hashes.items() %}
-                <li>{{ img }} — {{ hash[:20] }}...</li>
-            {% endfor %}
-        </ul>
-    </div>
+        <section class="list">
+            <h2>Registos</h2>
+            {% if hashes %}
+                <div class="grid">
+                    {% for name, data in hashes %}
+                        <article class="card">
+                            <div class="thumb">
+                                <img src="/images/{{ name }}" alt="{{ name }}" loading="lazy">
+                            </div>
+                            <div class="meta">
+                                <div class="name">{{ name }}</div>
+                                <div class="hash">{{ data.hash[:24] }}...</div>
+                                <div class="info">
+                                    <span>{{ data.size if data.size is not none else "?" }} bytes</span>
+                                    <span>{{ data.updated_at if data.updated_at else "sem data" }}</span>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="empty">Sem imagens registadas ainda.</p>
+            {% endif %}
+        </section>
+    </main>
 </body>
 </html>
