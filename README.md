@@ -32,3 +32,10 @@ This project was developed as a cybersecurity-oriented tool to detect unauthoriz
 
 ```bash
 pip install -r requirements.txt
+
+### 2. Run the Application
+
+```bash
+python app.py
+
+### 3. Open in Browser
