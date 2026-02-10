@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+button {
+    padding: 8px 15px;
+    margin-top: 10px;
+}
+
+.message {
+    margin-top: 15px;
+    font-weight: bold;
+}

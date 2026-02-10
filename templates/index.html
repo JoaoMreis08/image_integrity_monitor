@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Integrity Monitor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Image Integrity Monitor</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" required>
+            <button type="submit">Verificar</button>
+        </form>
+
+        {% if message %}
+            <p class="message">{{ message }}</p>
+        {% endif %}
+
+        <h2>Imagens registadas</h2>
+        <ul>
+            {% for img, hash in hashes.items() %}
+                <li>{{ img }} — {{ hash[:20] }}...</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
