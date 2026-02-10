@@ -25,20 +25,6 @@ This project was developed as a cybersecurity-oriented tool to detect unauthoriz
 
 ---
 
-## 📂 Project Structure
-
-image_integrity_monitor/
-├── app.py
-├── requirements.txt
-├── templates/
-│ └── index.html
-├── static/
-│ └── style.css
-├── images/ # ignored (local only)
-├── hashes.json # ignored (local only)
-
-
----
 
 ## ▶️ How to Run Locally
 
